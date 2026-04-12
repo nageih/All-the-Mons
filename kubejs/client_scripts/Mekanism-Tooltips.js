@@ -7,25 +7,25 @@ ItemEvents.modifyTooltips(allthemods => {
 
     //Mekasuit
     allthemods.add(/mekanism:mekasuit_/, [
-        Text.red('Increased Energy Consumption!'),
-        Text.green('Increased Energy Capacity')
+        Text.translatable('tooltip.kubejs.mekanism.inc_energy_cons').red(),
+        Text.translatable('tooltip.kubejs.mekanism.inc_energy_cap').green()
     ])
     //Meka Tool
     allthemods.add('mekanism:meka_tool', [
-        Text.red('Increased Energy Consumption!'),
-        Text.green('Increased Energy Capacity!'),
-        Text.green('Increased Attack Speed & Damage!')
+        Text.translatable('tooltip.kubejs.mekanism.inc_energy_cons').red(),
+        Text.translatable('tooltip.kubejs.mekanism.inc_energy_cap_exclamation').green(),
+        Text.translatable('tooltip.kubejs.mekanism.inc_attack_speed_damage').green()
     ])
 
     // ##### Generators #####
 
     //Solar Generator
     allthemods.add('mekanismgenerators:solar_generator', [
-        Text.green('Increased Energy Capacity & Production!')
+        Text.translatable('tooltip.kubejs.mekanism.inc_energy_cap_prod').green()
     ])
     //Advanced Solar Generator
     allthemods.add('mekanismgenerators:advanced_solar_generator', [
-        Text.green('Increased Energy Capacity & Production!')
+        Text.translatable('tooltip.kubejs.mekanism.inc_energy_cap_prod').green()
     ])
     //Wind Generator
     allthemods.add('mekanismgenerators:wind_generator', [

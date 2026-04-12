@@ -12,20 +12,20 @@ let permanentAnnouncements = Utils.newList()
 
 // Add your announcements here
 function initAnnouncements(){
-  addAnnouncement("0.3.0-beta", "First open beta version of the modpack!")
-  addAnnouncement("0.11.0-beta", "EnderDrive will be removed from the pack, check your storages!")
-  addAnnouncement("0.12.0-beta", "Twilight Forest will be removed from the pack!")
-  addAnnouncement("0.13.0-beta", "Ender Storage will be removed. Move your stuff to Dim Storage instead, it has the same functionality.")
-  addAnnouncement("0.15.0-beta", "Relics + Artifact Compat were completely reworked, old items are gone. Quest rework will follow in another update.")
+  addAnnouncement("0.3.0-beta", Text.translatable("announcement.kubejs.v0_3_0_beta"))
+  addAnnouncement("0.11.0-beta", Text.translatable("announcement.kubejs.v0_11_0_beta"))
+  addAnnouncement("0.12.0-beta", Text.translatable("announcement.kubejs.v0_12_0_beta"))
+  addAnnouncement("0.13.0-beta", Text.translatable("announcement.kubejs.v0_13_0_beta"))
+  addAnnouncement("0.15.0-beta", Text.translatable("announcement.kubejs.v0_15_0_beta"))
 
-  addPermanentAnnouncement(Text.of("").append(Text.red("This is a beta version, everything is subject to change!")))
-  addPermanentAnnouncement(Text.of("For issues, visit: ").append(Text.green("Github Issues").clickOpenUrl("https://github.com/AllTheMods/All-the-Mons/issues").hover(Text.translatable("mco.notification.visitUrl.buttonText.default"))))
-  addPermanentAnnouncement(Text.of("For mod suggestions or others features, visit: ").append(Text.green("Discussions").clickOpenUrl("https://github.com/AllTheMods/All-the-Mons/discussions").hover(Text.translatable("mco.notification.visitUrl.buttonText.default"))))
-  addPermanentAnnouncement(Text.of("For tech support, visit: ").append(Text.green("Discord #allthemons-techsupport").clickOpenUrl("https://discord.gg/allthemods").hover(Text.translatable("mco.notification.visitUrl.buttonText.default"))))
-  addPermanentAnnouncement(Text.of("Check our progress at: ").append(Text.green("Tracker [SPOILERS!]").clickOpenUrl("https://github.com/AllTheMods/All-the-Mons/issues/37").hover(Text.translatable("mco.notification.visitUrl.buttonText.default"))))      
+  addPermanentAnnouncement(Text.translatable("announcement.kubejs.permanent.beta_warning"))
+  addPermanentAnnouncement(Text.of("").append(Text.translatable("announcement.kubejs.permanent.issues")).append(Text.translatable("announcement.kubejs.permanent.github_issues").green().clickOpenUrl("https://github.com/AllTheMods/All-the-Mons/issues").hover(Text.translatable("mco.notification.visitUrl.buttonText.default"))))
+  addPermanentAnnouncement(Text.of("").append(Text.translatable("announcement.kubejs.permanent.suggestions")).append(Text.translatable("announcement.kubejs.permanent.discussions").green().clickOpenUrl("https://github.com/AllTheMods/All-the-Mons/discussions").hover(Text.translatable("mco.notification.visitUrl.buttonText.default"))))
+  addPermanentAnnouncement(Text.of("").append(Text.translatable("announcement.kubejs.permanent.support")).append(Text.translatable("announcement.kubejs.permanent.discord_support").green().clickOpenUrl("https://discord.gg/allthemods").hover(Text.translatable("mco.notification.visitUrl.buttonText.default"))))
+  addPermanentAnnouncement(Text.of("").append(Text.translatable("announcement.kubejs.permanent.progress")).append(Text.translatable("announcement.kubejs.permanent.tracker").green().clickOpenUrl("https://github.com/AllTheMods/All-the-Mons/issues/37").hover(Text.translatable("mco.notification.visitUrl.buttonText.default"))))      
 
   // keep this at last line
-  addAnnouncement(currentVersion.toString(), Text.translatable("Click %s for changelogs!", Text.green("HERE").clickOpenUrl("https://github.com/AllTheMods/All-the-Mons/blob/main/CHANGELOG.md").hover(Text.translatable("mco.notification.visitUrl.buttonText.default"))))
+  addAnnouncement(currentVersion.toString(), Text.translatable("announcement.kubejs.changelogs", Text.translatable("announcement.kubejs.here").green().clickOpenUrl("https://github.com/AllTheMods/All-the-Mons/blob/main/CHANGELOG.md").hover(Text.translatable("mco.notification.visitUrl.buttonText.default"))))
 }
 
 ServerEvents.loaded(event => {
@@ -60,11 +60,11 @@ PlayerEvents.loggedIn(event => {
     if (currentDismissed.compareTo(key) < 0 && currentVersion.compareTo(key) >= 0) {
       ableToDismiss = true
       if (printHeader) {
-        event.player.tell(Text.translatable("=====[  %s  ]=====", Text.yellow("All The Mods Announcements").bold()).gold().bold())
+        event.player.tell(Text.translatable("announcement.kubejs.header", Text.translatable("announcement.kubejs.title")))
         printHeader = false
       }
       for (let component of listComponents) {
-        let message = Text.translatable("[%s] - %s", Text.gold(key.toString()), component.yellow()).yellow()
+        let message = Text.translatable("[%s] - %s", Text.of(key.toString()).gold(), component)
         event.player.tell(message)
       }            
     }
@@ -72,10 +72,10 @@ PlayerEvents.loggedIn(event => {
   
   permanentAnnouncements.forEach(component => {
       if (printHeader) {
-        event.player.tell(Text.translatable("=====[  %s  ]=====", Text.yellow("All The Mods Announcements").bold()).gold().bold())
+        event.player.tell(Text.translatable("announcement.kubejs.header", Text.translatable("announcement.kubejs.title")))
         printHeader = false
       }
-      let message = Text.translatable(" - %s", component.yellow()).yellow()
+      let message = Text.translatable(" - %s", component)
       event.player.tell(message)
   })
 
