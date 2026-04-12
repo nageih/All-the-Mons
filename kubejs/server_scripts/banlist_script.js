@@ -40,7 +40,7 @@ if (!Platform.isClientEnvironment()) {
     let $EntityJoinLevelEvent = Java.loadClass("net.neoforged.neoforge.event.entity.EntityJoinLevelEvent")
     NativeEvents.onEvent($EntityJoinLevelEvent, event => {
       if (bannedEntities.contains(event.entity.type)) {
-        event.level.server.tell(Text.red("Removed banned entity: " + event.entity.type + " at " + event.entity.blockPosition().toShortString()))
+        event.level.server.tell(Text.translatable("message.kubejs.banlist.entity_removed", event.entity.type, event.entity.blockPosition().toShortString()))
         event.setCanceled(true)
       }      
     })
@@ -79,7 +79,7 @@ if (!Platform.isClientEnvironment()) {
 	  let pos
 	  while ((pos = blocksToRemove.poll()) != null) {
 		  addSignToPos(event.level, pos)
-		  event.level.server.tell("Removing banned block entity at " + pos.toShortString())
+		  event.level.server.tell(Text.translatable("message.kubejs.banlist.block_removed", pos.toShortString()))
 	  }
     })
 	LevelEvents.unloaded(event => {
@@ -91,7 +91,7 @@ if (!Platform.isClientEnvironment()) {
 function sendMessageAndCancel(/** @type {$ItemClickedKubeEvent_} */event, type) {
   switch (type) {
     case "item":
-      event.player.setStatusMessage(Text.red("This server does not allow you to use this item!"))
+      event.player.setStatusMessage(Text.translatable("message.kubejs.banlist.item_forbidden"))
       event.cancel()
       break
     default:

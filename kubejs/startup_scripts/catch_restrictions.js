@@ -30,7 +30,7 @@ global.thrownBallHit = (hitEvent) => {
     let allowedOutOfBattle = !(targetPokemon.hasLabels("mythical") || targetPokemon.hasLabels("ultra_beast") || targetPokemon.hasLabels("paradox") || targetPokemon.hasLabels("legendary"))
     //console.log("Allowed Out of battle? " + allowedOutOfBattle)
     if (!allowedOutOfBattle) {
-      owner.setStatusMessage(Text.translate("kubejs.atm.catch_restrictions.special_pokemons").red())
+      owner.setStatusMessage(Text.translate("kubejs.atm.catch_restrictions.special_pokemons"))
       owner.playNotifySound(errorSound, "players", 1, 1)
       hitEvent.cancel()
       return
@@ -48,7 +48,7 @@ global.thrownBallHit = (hitEvent) => {
     if (leader == null) {
       //console.log("Pokemon level: " + targetLevel)
       if (targetLevel > 15) {
-        owner.setStatusMessage(Text.translate("kubejs.atm.catch_restrictions.catch_without_leader").red())
+        owner.setStatusMessage(Text.translate("kubejs.atm.catch_restrictions.catch_without_leader"))
         owner.playNotifySound(errorSound, "players", 1, 1)
         hitEvent.cancel()
         return
@@ -56,7 +56,7 @@ global.thrownBallHit = (hitEvent) => {
     } else {
       let leaderLevel = leader.level
       if (targetLevel > leaderLevel) {
-        owner.setStatusMessage(Text.translate("kubejs.atm.catch_restrictions.leader_too_weak", leader.getDisplayName(false), leaderLevel).yellow())
+        owner.setStatusMessage(Text.translate("kubejs.atm.catch_restrictions.leader_too_weak", leader.getDisplayName(false), leaderLevel))
         owner.playNotifySound(errorSound, "players", 1, 1)
         hitEvent.cancel()
         return

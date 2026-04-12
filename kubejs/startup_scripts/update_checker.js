@@ -17,7 +17,7 @@ StartupEvents.postInit(event => {
       if (cfLatestVersion.compareTo(currentVersion) > 0) {
         let $SystemToast = Java.loadClass("net.minecraft.client.gui.components.toasts.SystemToast")
         let $SystemToastId = Java.loadClass("net.minecraft.client.gui.components.toasts.SystemToast$SystemToastId")
-        $SystemToast.add(Client.getToasts(), new $SystemToastId(10000), "New update is available!", Text.of("Version ").append(Text.green(cfLatestVersion)).append(" is already available!"))
+        $SystemToast.add(Client.getToasts(), new $SystemToastId(10000), Text.translatable("update_checker.kubejs.title"), Text.translatable("update_checker.kubejs.message", Text.of(cfLatestVersionStr).green()))
       } else {
         console.log("Pack is up to date!")
       }
